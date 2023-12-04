@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    container_name: cursoNest
+    environment:
+      MYSQL_DATABASE: cursoNest
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db:/var/lib/mysql
