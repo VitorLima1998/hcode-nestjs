@@ -45,7 +45,9 @@ config();
                 },
             },
         }),
-        ConfigModule.forRoot(),
+        ConfigModule.forRoot({
+            envFilePath: process.env.ENV === 'test' ? 'env.test' : '.env',
+        }),
         ThrottlerModule.forRoot([
             {
                 ttl: 60,
