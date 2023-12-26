@@ -33,9 +33,6 @@ describe('UserService', () => {
 
             const result = await userService.create(createUserDTO);
 
-            console.log('Returned value:', result);
-            console.log('Expected value:', userEntityList[0]);
-
             expect(result).toEqual(userEntityList[0]);
         });
     });

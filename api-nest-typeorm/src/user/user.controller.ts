@@ -39,8 +39,6 @@ export class UserController {
 
     @Get('/:id')
     async readOne(@ParamId() id: string) {
-        console.log({ id });
-
         return this.userService.findOne(id);
     }
     @Put('/:id')
@@ -56,6 +54,8 @@ export class UserController {
     }
     @Delete('/:id')
     async delete(@Param('id') id: string) {
-        return this.userService.delete(id);
+        return {
+            success: await this.userService.delete(id),
+        };
     }
 }

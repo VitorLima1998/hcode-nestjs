@@ -21,10 +21,12 @@ export class CreateUserDTO {
         minNumbers: 0,
     })
     password: string;
+
     @IsOptional()
     @IsDateString()
-    birthAt: string;
+    birthAt?: string;
+
     @IsOptional()
     @IsEnum(Role)
-    role: number;
+    role?: number;
 }
