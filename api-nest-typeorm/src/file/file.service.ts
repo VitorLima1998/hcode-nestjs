@@ -1,10 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Multer } from 'multer';
 import { writeFile } from 'fs/promises';
+import { join } from 'path';
+import { PathLike } from 'fs';
 
 @Injectable()
 export class FileService {
-    async upload(file: Multer.File, path: string) {
-        return writeFile(path, file.buffer);
+    getDestinationPath() {
+        return join(__dirname, '..', '..', 'storage', 'photos');
+    }
+    async upload(file: Express.Multer.File, filename: string) {
+        const path: PathLike = join(this.getDestinationPath(), filename);
+        await writeFile(path, file.buffer);
+        return path;
     }
 }
