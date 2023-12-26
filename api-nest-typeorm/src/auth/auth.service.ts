@@ -29,6 +29,9 @@ export class AuthService {
     ) {}
 
     async createToken(user: UserEntity) {
+        if (!user) {
+            throw new Error('User is undefined');
+        }
         return {
             accessToken: this.jwt.sign(
                 {
@@ -116,14 +119,14 @@ export class AuthService {
             },
         });
 
-        return true;
+        return { success: true };
     }
 
     async reset(password: string, token: string) {
         try {
             const data: any = this.jwt.verify(token, {
-                audience: 'users',
                 issuer: 'forget',
+                audience: 'users',
             });
 
             if (!isString(data.id)) {
@@ -146,6 +149,8 @@ export class AuthService {
     }
 
     async register(data: AuthRegisterDTO) {
+        delete data.role;
+
         const user = await this.userService.create(data);
 
         return this.createToken(user);
