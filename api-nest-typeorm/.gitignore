@@ -2,7 +2,9 @@
 /dist
 /node_modules
 db
+db-test
 .env
+.env.test
 
 # Logs
 logs
