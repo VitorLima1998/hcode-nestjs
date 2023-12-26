@@ -8,14 +8,26 @@ services:
             - .env
         environment:
             MYSQL_DATABASE: ${DATABASE}
-            MYSQL_USER: ${DB_USERNAME}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
         ports:
             - '3306:3306'
         volumes:
             - ./db:/var/lib/mysql
+        networks:
+            - mynetwork
 
+    mysql-test:
+        image: mysql
+        container_name: api-nest-typeorm-test
+        env_file:
+            - .env.test
+        environment:
+            MYSQL_DATABASE: ${DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+        ports:
+            - '3307:3306'
+        volumes:
+            - ./db-test:/var/lib/mysql
         networks:
             - mynetwork
 
